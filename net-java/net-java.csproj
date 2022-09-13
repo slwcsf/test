@@ -3,9 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>net_java</RootNamespace>
+    <RootNamespace>com.sunlw.net</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>com.sunlw.net</AssemblyName>
   </PropertyGroup>
 
 </Project>
