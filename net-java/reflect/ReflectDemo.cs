@@ -61,6 +61,16 @@ namespace com.sunlw.net.reflect
             var obj6 = constructor3!.Invoke(parameters3);
             var cat6 = (Animal<Dog>)obj6!;
             Console.WriteLine(cat6.Say());
+
+
+            //MethodInfo
+            var catType2 = Type.GetType(CatClassName)!;
+            var objectHandle2 = Activator.CreateInstance(catType2);
+            var m1 =catType2.GetMethod("HI");
+            var m2 =catType2.GetMethod("Say");
+            m1!.Invoke(null, null);
+            m2!.Invoke(objectHandle2, null);
+
         }
 
 
