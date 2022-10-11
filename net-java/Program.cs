@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using com.sunlw.net.Myevent;
 using com.sunlw.net.reflect;
+using com.sunlw.net.Tcp;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -106,5 +107,11 @@ var b_4 = (byte)'A'; //可以直接转字节 byte->65
 var b_5 = (byte)125; //byte->125
 
 #endregion 编码测试
+
+#region 测试Stream
+
+//StreamTest.TestStream();
+
+#endregion 测试Stream
 
 Console.ReadLine();
