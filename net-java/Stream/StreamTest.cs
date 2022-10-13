@@ -10,6 +10,7 @@ using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
 using System.Globalization;
+using System.Net.Http;
 
 namespace com.sunlw.net.Tcp
 {
@@ -18,6 +19,41 @@ namespace com.sunlw.net.Tcp
     /// </summary>
     public class StreamTest
     {
+        public static void TestTcp()
+        {
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ipaddress = IPAddress.Parse("127.0.0.1");
+            EndPoint point = new IPEndPoint(ipaddress, 9500);
+            socket.Connect(point);//通过IP和端口号来定位一个所要连接的服务器端
+            Stream netstream = new NetworkStream(socket);
+            var _reader = new BufferedStream(netstream, 65535);
+            var _writer = new BufferedStream(netstream, 65535);
+
+            byte[] writeBytes = new byte[] { 1, 1, 1, 1 };
+            _writer.Write(writeBytes, 0, 4);
+            _writer.Flush();
+
+            Thread.Sleep(500);
+            byte[] readBytes = new byte[255];
+            _reader.Read(readBytes, 0, 255);
+            _reader.Flush();
+
+            var srt = Encoding.UTF8.GetString(readBytes, 0, 255);
+            FileStream fs = new FileStream("D:\\123.txt", FileMode.OpenOrCreate);
+            var bs = new BufferedStream(fs);
+            bs.Write(readBytes);
+            bs.Write(Encoding.UTF8.GetBytes("\n"));
+            bs.Write(Encoding.UTF8.GetBytes("你好"));
+            bs.Flush();
+
+            //FileStream fs2 = new FileStream("D:\\1234.txt", FileMode.OpenOrCreate);
+            var sw = new StreamWriter("D:\\1234.txt", true);
+            sw.WriteLine("你好");
+            sw.WriteLine("你好");
+            sw.Flush();
+            Console.WriteLine(srt);
+        }
+
         public static void TestStream()
         {
             byte[] buffer = null;

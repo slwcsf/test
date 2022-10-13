@@ -111,6 +111,7 @@ var b_5 = (byte)125; //byte->125
 #region 测试Stream
 
 //StreamTest.TestStream();
+StreamTest.TestTcp();
 
 #endregion 测试Stream
 
