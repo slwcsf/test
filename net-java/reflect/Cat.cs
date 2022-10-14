@@ -17,6 +17,11 @@ namespace com.sunlw.net.reflect
             this.age = age;
         }
 
+        public static void HI()
+        {
+            Console.WriteLine("我是静态方法");
+        }
+
         public Cat()
         {
             this.name = "无名氏";
@@ -26,6 +31,7 @@ namespace com.sunlw.net.reflect
         {
             return $"我的名字{name},年龄{(age == null ? "未知" : age.ToString())}";
         }
+
 
         public async Task<string> SayAsync()
         {
