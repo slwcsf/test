@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Globalization;
 using System.Net.Http;
+using System.IO.Pipelines;
 
 namespace com.sunlw.net.Tcp
 {
@@ -23,7 +24,7 @@ namespace com.sunlw.net.Tcp
         {
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipaddress = IPAddress.Parse("127.0.0.1");
-            EndPoint point = new IPEndPoint(ipaddress, 9500);
+            EndPoint point = new IPEndPoint(ipaddress, 9090);
             socket.Connect(point);//通过IP和端口号来定位一个所要连接的服务器端
             Stream netstream = new NetworkStream(socket);
             var _reader = new BufferedStream(netstream, 65535);
@@ -52,6 +53,32 @@ namespace com.sunlw.net.Tcp
             sw.WriteLine("你好");
             sw.Flush();
             Console.WriteLine(srt);
+        }
+
+        public static void TestTcp2()
+        {
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    Task.Factory.StartNew(() =>
+            //    {
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ipaddress = IPAddress.Parse("127.0.0.1");
+            EndPoint point = new IPEndPoint(ipaddress, 4040);
+            socket.Connect(point);
+            //通过IP和端口号来定位一个所要连接的服务器端
+            byte[] data = new byte[1024];
+            //传递一个byte数组，用于接收数据。length表示接收了多少字节的数据
+            socket.Send(Encoding.UTF8.GetBytes("add 1\r\n"));
+            //socket.Send(Encoding.UTF8.GetBytes("\r\n"));
+            var srt = Encoding.UTF8.GetString(data, 0, 255);
+            //Stream netstream = new NetworkStream(socket);
+            //var _reader = new BufferedStream(netstream, 2);
+            //byte[] readBytes = new byte[2];
+            //_reader.Read(readBytes, 0, 2);
+            //var srt = Encoding.UTF8.GetString(readBytes, 0, 2);
+            //Console.WriteLine(srt);
+            //    });
+            //}
         }
 
         public static void TestStream()
@@ -245,6 +272,30 @@ namespace com.sunlw.net.Tcp
                 }
             }
             Console.ReadLine();
+        }
+
+        public static async Task Testpipe()
+        {
+            Pipe pipe = new Pipe();
+            ReadOnlyMemory<byte> source = new ReadOnlyMemory<byte>(new byte[] { 1, 2, 3, 4, 5 });
+            await pipe.Writer.WriteAsync(source);
+            pipe.Writer.Advance(2);
+            await pipe.Writer.WriteAsync(source);
+            await pipe.Writer.FlushAsync();
+
+            ReadResult a = await pipe.Reader.ReadAsync();
+
+            var b = a.Buffer.GetPosition(5);
+            //var b = a.Buffer;
+            //var c = b.Start;
+            //ReadOnlyMemory<byte> source2 = new ReadOnlyMemory<byte>();
+            //b.TryGet(ref c, out source2);
+            pipe.Reader.AdvanceTo(b);
+
+            ReadResult c = await pipe.Reader.ReadAsync();
+
+            //ReadOnlyMemory<byte> source3 = new ReadOnlyMemory<byte>();
+            //b.TryGet(ref c, out source3);
         }
 
         /// <summary>

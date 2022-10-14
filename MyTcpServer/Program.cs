@@ -3,4 +3,6 @@ using MyTCPServer;
 
 Console.WriteLine("Hello, World!");
 
-Server server = new Server();
+Server server = new Server("127.0.0.1", 4040);
+
+Console.ReadLine();

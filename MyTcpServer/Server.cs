@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using System.IO.Pipelines;
 
 namespace MyTCPServer
 {
@@ -15,10 +17,56 @@ namespace MyTCPServer
 
         public Server()
         {
-            this.tcpListener = new TcpListener(IPAddress.Any, 9500);
+            this.tcpListener = new TcpListener(IPAddress.Any, 9090);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-            Console.WriteLine("Server started at {0} :{1} @ {2}", IPAddress.Any, 9500, DateTime.Now.ToString());
+            Console.WriteLine("Server started at {0} :{1} @ {2}", IPAddress.Any, 9090, DateTime.Now.ToString());
+        }
+
+        public Server(string ip, int port)
+        {
+            var listenEndpoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            var listenSocket = new Socket(listenEndpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            listenSocket.NoDelay = true;
+            listenSocket.Bind(listenEndpoint);
+            listenSocket.Listen();
+
+            Task.Factory.StartNew(async () =>
+            {
+                await KeepAccept(listenSocket);
+            });
+        }
+
+        private async Task KeepAccept(Socket listenSocket)
+        {
+            while (true)
+            {
+                try
+                {
+                    var client = await listenSocket.AcceptAsync().ConfigureAwait(false);
+                    IList<ArraySegment<byte>> array = new List<ArraySegment<byte>>();
+                    array.Add(new ArraySegment<byte>(new byte[] { (byte)'O', (byte)'K' }));
+                    await client.SendAsync(array, SocketFlags.None);
+                }
+                catch (Exception e)
+                {
+                    if (e is ObjectDisposedException || e is NullReferenceException)
+                        break;
+
+                    if (e is SocketException se)
+                    {
+                        var errorCode = se.ErrorCode;
+
+                        //The listen socket was closed
+                        if (errorCode == 125 || errorCode == 89 || errorCode == 995 || errorCode == 10004 || errorCode == 10038)
+                        {
+                            break;
+                        }
+                    }
+
+                    continue;
+                }
+            }
         }
 
         private void ListenForClients()

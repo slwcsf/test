@@ -9,4 +9,8 @@
     <AssemblyName>com.sunlw.net</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IO.Pipelines" Version="6.0.3" />
+  </ItemGroup>
+
 </Project>
