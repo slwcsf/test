@@ -343,6 +343,33 @@ namespace com.sunlw.net.Tcp
                 i++;
             }
         }
+
+        public static async Task TestTask()
+        {
+            await TestTask2();
+            var t1 = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+            });
+            var t2 = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+            });
+            await Task.WhenAll(t1, t2);
+        }
+
+        private static async Task TestTask2()
+        {
+            var t1 = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+            });
+            var t2 = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+            });
+            await Task.WhenAll(t1, t2);
+        }
     }
 
     public class StreamWriterTest

@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using com.sunlw.net.ConCurrent;
 using com.sunlw.net.Myevent;
 using com.sunlw.net.MyTask;
 using com.sunlw.net.reflect;
@@ -112,11 +113,102 @@ Console.WriteLine("Hello, World!");
 #region 测试Stream
 
 //StreamTest.TestStream();
-await StreamTest.Testpipe();
+//await StreamTest.Testpipe();
+
+//await StreamTest.TestTask();
 
 #endregion 测试Stream
+
+#region 测试manualReset
+
+//ManualReset manualReset = new ManualReset();
+
+//manualReset.Start();
+////await Task.Delay(30000);
+
+////manualReset.Suspend();
+////manualReset.Suspend();
+
+////await Task.Delay(10000);
+
+//manualReset.Continue();
+////manualReset.Continue();
+////manualReset.Suspend();
+
+#endregion 测试manualReset
 
 //MyValueTaskTest myValueTaskTest = new MyValueTaskTest();
 
 //await myValueTaskTest.Test();
+
+#region 测试并发字典
+
+//TestConcurrent testConcurrent = new TestConcurrent();
+
+//var ren1 = new DaRen(1, 10, "张三");
+//var ren2 = new DaRen(2, 12, "李四");
+//testConcurrent.dic = new System.Collections.Concurrent.ConcurrentDictionary<int, DaRen>();
+////testConcurrent.dic.AddOrUpdate(1, ren1, (k, v) =>
+////{
+////    return ren1;
+////});
+//var aa = testConcurrent.dic.GetOrAdd(1, ren1);
+//testConcurrent.dic.AddOrUpdate(2, ren2, (k, v) => v);
+//Task.Factory.StartNew(async () =>
+//{
+//    while (true)
+//    {
+//        aa.ren.Name = "张三";
+//        await Task.Delay(2000);
+//        Console.WriteLine("线程1:" + aa.ren.Name);
+//    }
+//});
+//Task.Factory.StartNew(async () =>
+//{
+//    while (true)
+//    {
+//        aa.ren.Name = "李四";
+//        await Task.Delay(2000);
+//        Console.WriteLine("线程2:" + aa.ren.Name);
+//    }
+//});
+
+//Task.Factory.StartNew(async () =>
+//{
+//    while (true)
+//    {
+//        Console.WriteLine("线程3:" + aa.ren.Name);
+//        await Task.Delay(2000);
+//    }
+//});
+
+//var ren3 = new DaRen(1, 101, "张三1");
+////testConcurrent.dic.AddOrUpdate(1, ren3, (k, v) =>
+////{
+////    var oldV = v;
+////    oldV.ren.Name = "张三修改";
+////    return oldV;
+////});
+
+//var ren4 = ren3;
+//ren4.ren.Name = "111";
+
+//var aa = testConcurrent.dic.TryUpdate(1, ren3, ren4);
+//var v = testConcurrent.dic.AddOrUpdate(10, (k) => ren3, (k, v) => v);
+//ren3.No = 999;
+
+//testConcurrent.dic.TryGetValue(10, out DaRen daRen);
+
+//var v2 = testConcurrent.dic.AddOrUpdate(10, (k) => ren3, (k, v) =>
+//{
+//    v.No = 119;
+//    return v;
+//}
+//);
+
+//var b = object.Equals(v, ren3);
+//var b2 = object.Equals(v2, ren3);
+
+#endregion 测试并发字典
+
 Console.ReadLine();
