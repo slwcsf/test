@@ -122,19 +122,19 @@ Console.WriteLine("Hello, World!");
 
 #region 测试manualReset
 
-ManualReset manualReset = new ManualReset();
+//ManualReset manualReset = new ManualReset();
 
-manualReset.Start();
-//await Task.Delay(30000);
+//manualReset.Start();
+////await Task.Delay(30000);
 
-//manualReset.Suspend();
-//manualReset.Suspend();
+////manualReset.Suspend();
+////manualReset.Suspend();
 
-//await Task.Delay(10000);
+////await Task.Delay(10000);
 
-manualReset.Continue();
 //manualReset.Continue();
-//manualReset.Suspend();
+////manualReset.Continue();
+////manualReset.Suspend();
 
 #endregion 测试manualReset
 
@@ -217,4 +217,11 @@ manualReset.Continue();
 //{
 //    int a = 1;
 //}
+
+#region 测试TaskCompletionSource
+
+TaskCompletionSourceTest completionSourceTest = new TaskCompletionSourceTest();
+await completionSourceTest.Test();
+#endregion
+
 Console.ReadLine();
