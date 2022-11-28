@@ -4,6 +4,7 @@ using com.sunlw.net.Myevent;
 using com.sunlw.net.MyTask;
 using com.sunlw.net.reflect;
 using com.sunlw.net.Tcp;
+using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -121,19 +122,19 @@ Console.WriteLine("Hello, World!");
 
 #region 测试manualReset
 
-//ManualReset manualReset = new ManualReset();
+ManualReset manualReset = new ManualReset();
 
-//manualReset.Start();
-////await Task.Delay(30000);
+manualReset.Start();
+//await Task.Delay(30000);
 
-////manualReset.Suspend();
-////manualReset.Suspend();
+//manualReset.Suspend();
+//manualReset.Suspend();
 
-////await Task.Delay(10000);
+//await Task.Delay(10000);
 
+manualReset.Continue();
 //manualReset.Continue();
-////manualReset.Continue();
-////manualReset.Suspend();
+//manualReset.Suspend();
 
 #endregion 测试manualReset
 
@@ -211,4 +212,9 @@ Console.WriteLine("Hello, World!");
 
 #endregion 测试并发字典
 
+//JObject jObject = JObject.Parse("{\"name2\":\"123\"}");
+//if (jObject.TryGetValue("name", out JToken jToken) && jToken.ToString() == "123")
+//{
+//    int a = 1;
+//}
 Console.ReadLine();

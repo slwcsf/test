@@ -19,7 +19,7 @@ namespace com.sunlw.net.MyTask
                     await Task.Delay(2000);
                     // 初始化为true时执行WaitOne不阻塞
                     _resetEvent.WaitOne();
-                    // _resetEvent.Reset();
+                     _resetEvent.Reset();
                     // Doing something.......
                     await Task.Delay(2000);
                 }

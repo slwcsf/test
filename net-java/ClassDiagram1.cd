@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Newtonsoft.Json.Linq.JToken" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JObject">
+    <Position X="5.25" Y="9" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JContainer">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JArray">
+    <Position X="8" Y="9.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.CommentHandling" Collapsed="true">
+    <Position X="21.75" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.DuplicatePropertyNameHandling" Collapsed="true">
+    <Position X="23.5" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.Extensions" Collapsed="true">
+    <Position X="25.25" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JConstructor">
+    <Position X="13.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JEnumerable&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27" Y="3" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JProperty">
+    <Position X="11" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JPropertyDescriptor" Collapsed="true">
+    <Position X="21.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JRaw" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JsonLoadSettings" Collapsed="true">
+    <Position X="23.5" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JsonMergeSettings" Collapsed="true">
+    <Position X="25.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JsonSelectSettings" Collapsed="true">
+    <Position X="27" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JTokenEqualityComparer" Collapsed="true">
+    <Position X="21.75" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JTokenReader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JTokenType" Collapsed="true">
+    <Position X="25.25" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JTokenWriter" Collapsed="true">
+    <Position X="27" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.JValue" Collapsed="true">
+    <Position X="12.75" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.LineInfoHandling" Collapsed="true">
+    <Position X="21.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.MergeArrayHandling" Collapsed="true">
+    <Position X="23.5" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Newtonsoft.Json.Linq.MergeNullValueHandling" Collapsed="true">
+    <Position X="25.25" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Newtonsoft.Json.Linq.IJEnumerable&lt;T&gt;" Collapsed="true">
+    <Position X="21.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
