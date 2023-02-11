@@ -3,7 +3,9 @@ using com.sunlw.net.ConCurrent;
 using com.sunlw.net.Myevent;
 using com.sunlw.net.MyTask;
 using com.sunlw.net.reflect;
+using com.sunlw.net.signalRClient;
 using com.sunlw.net.Tcp;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,7 +16,7 @@ Console.WriteLine("Hello, World!");
 
 ////反射对象
 //ReflectDemo.TestObj();
-////反射方法
+//////反射方法
 //ReflectDemo.TestMethond();
 //await ReflectDemo.TestAsyncMethond();
 
@@ -58,22 +60,22 @@ Console.WriteLine("Hello, World!");
 
 //#endregion 事件测试代码2
 
-//#region 事件包装类
+#region 事件包装类
 
-///*
-//* 为了扩展用
-//*/
-//CarSpeed carSpeed = new CarSpeed();
-//carSpeed.Callback += (obj, a) =>
-//{
-//    Console.WriteLine($"{obj!.ToString()}我要加速了,{a}");
-//};
-//Person2 person21 = new Person2("赵六");
-//carSpeed.Callback += person21.Warning!;
+/*
+* 为了扩展用
+*/
+CarSpeed carSpeed = new CarSpeed();
+carSpeed.Callback += (obj, a) =>
+{
+    Console.WriteLine($"{obj!.ToString()}我要加速了,{a}");
+};
+Person2 person21 = new Person2("赵六");
+carSpeed.Callback += person21.Warning!;
 
-//carSpeed.Start(new object { }, 200);
+carSpeed.Start(new object { }, 200);
 
-//#endregion 事件包装类
+#endregion 事件包装类
 
 //#region struct
 
@@ -125,16 +127,16 @@ Console.WriteLine("Hello, World!");
 //ManualReset manualReset = new ManualReset();
 
 //manualReset.Start();
-////await Task.Delay(30000);
+//await Task.Delay(30000);
 
-////manualReset.Suspend();
-////manualReset.Suspend();
+//manualReset.Suspend();
+//manualReset.Suspend();
 
-////await Task.Delay(10000);
+//await Task.Delay(10000);
 
 //manualReset.Continue();
-////manualReset.Continue();
-////manualReset.Suspend();
+//manualReset.Continue();
+//manualReset.Suspend();
 
 #endregion 测试manualReset
 
@@ -220,8 +222,79 @@ Console.WriteLine("Hello, World!");
 
 #region 测试TaskCompletionSource
 
-TaskCompletionSourceTest completionSourceTest = new TaskCompletionSourceTest();
-await completionSourceTest.Test();
-#endregion
+//TaskCompletionSourceTest completionSourceTest = new TaskCompletionSourceTest();
+//await completionSourceTest.Test();
 
+#endregion 测试TaskCompletionSource
+
+//SignalRClientTest signalRClientTest = new SignalRClientTest();
+//await signalRClientTest.Test();
+//List<Task> list = new List<Task>();
+//for (int i = 0; i < 10; i++)
+//{
+//    Task task = new Task(async () =>
+//    {
+//        LockTest lockTest = new LockTest();
+//        await lockTest.Test();
+//    });
+//    list.Add(task);
+//}
+//foreach (var item in list)
+//{
+//    item.Start();
+//}
+//string a = "４４４９６７１";
+//a = ToDBC(a);
+//var b = ToDBC("4449671");
+//var bc = ToDBC("１2");
+
+var complete = false;
+CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(10000);
+var token = cancellationTokenSource.Token;
+await Task.Run(async () => {
+
+    while (true)
+    {
+        try
+        {
+            token.ThrowIfCancellationRequested();
+            //complete = true;
+            await Task.Delay(3000);
+            Console.WriteLine(1);
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("AAA" + complete);
+            break;
+        }
+
+    }
+
+}, token);
+
+
+Console.WriteLine("zui"+complete);
 Console.ReadLine();
+
+/// <summary> 转半角的函数(DBC case) </summary>
+/// <param name="input">任意字符串</param>
+/// <returns>半角字符串</returns>
+///<remarks>
+///全角空格为12288，半角空格为32
+///其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+///</remarks>
+static string ToDBC(string input)
+{
+    char[] c = input.ToCharArray();
+    for (int i = 0; i < c.Length; i++)
+    {
+        if (c[i] == 12288)
+        {
+            c[i] = (char)32;
+            continue;
+        }
+        if (c[i] > 65280 && c[i] < 65375)
+            c[i] = (char)(c[i] - 65248);
+    }
+    return new string(c);
+}
